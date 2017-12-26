@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="https://unpkg.com/vue@2.3.3"></script>
+    <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.charts.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/fusioncharts@3.12.1/themes/fusioncharts.theme.fint.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vue-fusioncharts/dist/vue-fusioncharts.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <fusioncharts
+        :type="type"
+        :width="width"
+        :height="height"
+        :dataFormat="dataFormat"
+        :dataSource="dataSource"
+      ></fusioncharts>
+
+      <p>
+        <input type="checkbox" id="languages" checked @click="switchSkill(0)"/>
+        <label for="languages">Langages</label>
+        <input type="checkbox" id="scm" checked/>
+        <label for="scm">Gestion de sources</label>
+        <input type="checkbox" id="methods" checked/>
+        <label for="methods">Méthodes</label>
+      </p>
+
+    </div>
+
+
+
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
