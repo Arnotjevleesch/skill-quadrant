@@ -19,11 +19,11 @@
       ></fusioncharts>
 
       <p>
-        <input type="checkbox" id="languages" checked @click="switchSkill(0)"/>
+        <input type="checkbox" id="languages" ref="languages" checked @click="updateSkills"/>
         <label for="languages">Langages</label>
-        <input type="checkbox" id="scm" checked/>
+        <input type="checkbox" id="scm" ref="scm" checked @click="updateSkills"/>
         <label for="scm">Gestion de sources</label>
-        <input type="checkbox" id="methods" checked/>
+        <input type="checkbox" id="methods" ref="methods" checked @click="updateSkills"/>
         <label for="methods">Méthodes</label>
       </p>
 

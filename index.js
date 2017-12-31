@@ -28,61 +28,89 @@ const myDataSource = {
         }, {
             "x": "100"
         }]
-    }],
-    "dataset":
-    [{
-        "color": "#00aee4",
-        "data": [{
-            "x": "90",
-            "y": "90",
-            "z": "10",
-            "name": "Git"
-        },{
-            "x": "20",
-            "y": "30",
-            "z": "10",
-            "name": "SVN"
-        }]
-    },
-    {
-        "color": "#aabbcc",
-        "data": [{
-            "x": "50",
-            "y": "50",
-            "z": "10",
-            "name": "Java"
-        }, {
-            "x": "40",
-            "y": "10",
-            "z": "10",
-            "name": "Python"
-        }]
-    },
-    {
-        "color": "#dd1111",
-        "data": [{
-            "x": "80",
-            "y": "50",
-            "z": "10",
-            "name": "Scrum"
-        }]
     }]
 };
+
+function parseUrlResponse(url) {
+  return new Promise(function(resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(e) {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.responseText))
+        } else {
+          reject(xhr.status)
+        }
+      }
+    }
+    xhr.ontimeout = function () {
+      reject('timeout')
+    }
+    xhr.open('get', url, true)
+    xhr.send()
+  })
+}
+
+async function parseUrlResponseUsingFetch(url) {
+
+  let objRes;
+
+  await fetch(url)
+  .then(function(response) {
+      var contentType = response.headers.get("content-type");
+      if(contentType && contentType.indexOf("application/json") !== -1) {
+        return response.json();
+      } else {
+        console.log("Oops, nous n'avons pas du JSON!");
+      }
+    }) // Transform the data into json
+  .then(function(data) {
+      objRes = data;
+  })
+
+  return objRes;
+}
+
+async function buildDataset(ids) {
+
+  let dataset;
+
+  await Promise.all(ids.map(function(id) {
+      return parseUrlResponseUsingFetch("https://arnotjevleesch.github.io/skill-quadrant/skill-data/" + id + ".json")
+      //return parseUrlResponseUsingFetch("./skill-data/" + id + ".json")
+      .then(function(result) {
+          return result
+      });
+  })).then(function(results) {
+      // results is an array of skill json object
+      dataset = results;
+  })
+  return dataset;
+}
 
 const chart = new Vue({
   el: '#app',
   data: {
-      type: 'bubble',
-      width: '1000', //to specify the width of the chart
-      height: '600', //to specify the height of the chart
-      dataFormat: 'json',
-      dataSource: myDataSource
+    type: 'bubble',
+    width: '1000', //to specify the width of the chart
+    height: '600', //to specify the height of the chart
+    dataFormat: 'json',
+    dataSource: myDataSource
+  },
+  mounted: function () {
+    this.updateSkills();
   },
   methods: {
-      switchSkill(n) {
-          //const prevDs = Object.assign({}, this.dataSource);
-          //prevDs.chart.captionAlignment = 'left';
-          //this.dataSource = prevDs;
-      }
+    async updateSkills() {
+      ids = Object.values(this.$refs)
+          .filter(ref => ref.checked)
+          .map(ref => ref.id);
+
+      dataset = await buildDataset(ids);
+
+      const prevDs = Object.assign({}, this.dataSource);
+      prevDs.dataset = dataset;
+      this.dataSource = prevDs;
+    }
   }
 });
