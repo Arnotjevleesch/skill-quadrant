@@ -2,6 +2,8 @@
   <head>
     <meta charset="UTF-8">
 
+    <link rel="stylesheet" href="index.css">
+
     <script type="text/javascript" src="https://unpkg.com/vue@2.3.3"></script>
     <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.js"></script>
     <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.charts.js"></script>
@@ -10,6 +12,8 @@
   </head>
   <body>
     <div id="app">
+
+      <div>
       <fusioncharts
         :type="type"
         :width="width"
@@ -17,15 +21,22 @@
         :dataFormat="dataFormat"
         :dataSource="dataSource"
       ></fusioncharts>
+      </div>
 
-      <p>
-        <input type="checkbox" id="languages" ref="languages" checked @click="updateSkills"/>
-        <label for="languages">Langages</label>
-        <input type="checkbox" id="scm" ref="scm" checked @click="updateSkills"/>
-        <label for="scm">Gestion de sources</label>
-        <input type="checkbox" id="methods" ref="methods" checked @click="updateSkills"/>
-        <label for="methods">Méthodes</label>
-      </p>
+      <div>
+        <p>
+          <input type="checkbox" id="languages" ref="languages" checked @click="updateSkills"/>
+          <label for="languages">Langages</label>
+        </p>
+        <p>
+          <input type="checkbox" id="scm" ref="scm" checked @click="updateSkills"/>
+          <label for="scm">Gestion de sources</label>
+        </p>
+        <p>
+          <input type="checkbox" id="methods" ref="methods" checked @click="updateSkills"/>
+          <label for="methods">Méthodes</label>
+        </p>
+      </div >
 
     </div>
 
