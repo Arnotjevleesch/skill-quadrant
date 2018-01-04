@@ -121,3 +121,23 @@ const chart = new Vue({
     }
   }
 });
+
+// https://developer.github.com/v3/repos/contents/
+async function getListSkillFileNames() {
+  return await parseUrlResponseUsingFetch("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data");
+}
+
+const boxes = new Vue({
+  el: '#boxes',
+  mounted: function () {
+    this.loadSkills();
+  },
+  methods: {
+    async loadSkills() {
+      console.log(getListSkillFileNames());
+    }
+  }
+
+});
+
+
