@@ -103,8 +103,15 @@ const chart = new Vue({
   methods: {
     async updateSkills() {
       ids = Object.values(this.$refs)
-          .filter(ref => ref.checked)
-          .map(ref => ref.id);
+        .filter(ref => ref.checked)
+        .map(ref => ref.id);
+
+      // check if one checkbox is on at least
+      if (event && ids.length == 0) {
+        alert("Choisissez au moins une compétence.");
+        event.target.checked = true;
+        return;
+      }
 
       dataset = await buildDataset(ids);
 
