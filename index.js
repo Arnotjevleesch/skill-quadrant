@@ -98,7 +98,7 @@ const chart = new Vue({
     dataSource: myDataSource
   },
   mounted: function () {
-    this.updateSkills();
+    //this.updateSkills();
   },
   methods: {
     async updateSkills() {
@@ -124,7 +124,16 @@ const chart = new Vue({
 
 // https://developer.github.com/v3/repos/contents/
 async function getListSkillFileNames() {
-  return await parseUrlResponseUsingFetch("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data");
+  let obj;
+  
+  await parseUrlResponseUsingFetch("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data")
+  .then(function(result) {
+    obj = result;
+  });
+
+  return obj
+    .map(file => file.name)
+    .map(name => name.split('.')[0]);
 }
 
 const boxes = new Vue({
@@ -134,10 +143,7 @@ const boxes = new Vue({
   },
   methods: {
     async loadSkills() {
-      console.log(getListSkillFileNames());
+      console.log(await getListSkillFileNames());
     }
   }
-
 });
-
-
