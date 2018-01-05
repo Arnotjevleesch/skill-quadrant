@@ -18,7 +18,7 @@ const myDataSource = {
         "showValues": "1",
         "drawQuadrant": "1",
         "quadrantLabelTL": "ENTHOUSIASTE",
-        "quadrantLabelTR": "ÉVANGÉLISTE",
+        "quadrantLabelTR": "FERVENT",
         "quadrantLabelBL": "CURIEUX",
         "quadrantLabelBR": "EXPERIMENTÉ",
         "bubbleScale": "0.5"
@@ -54,9 +54,7 @@ function parseUrlResponse(url) {
 
 async function parseUrlResponseUsingFetch(url) {
 
-  let objRes;
-
-  await fetch(url)
+  return await fetch(url)
   .then(function(response) {
       var contentType = response.headers.get("content-type");
       if(contentType && contentType.indexOf("application/json") !== -1) {
@@ -66,27 +64,21 @@ async function parseUrlResponseUsingFetch(url) {
       }
     }) // Transform the data into json
   .then(function(data) {
-      objRes = data;
-  })
-
-  return objRes;
+      return data;
+  });
 }
 
 async function buildDataset(ids) {
 
-  let dataset;
-
-  await Promise.all(ids.map(function(id) {
+  return await Promise.all(ids.map(function(id) {
       return parseUrlResponseUsingFetch("https://arnotjevleesch.github.io/skill-quadrant/skill-data/" + id + ".json")
-      //return parseUrlResponseUsingFetch("./skill-data/" + id + ".json")
       .then(function(result) {
-          return result
+          return result;
       });
   })).then(function(results) {
       // results is an array of skill json object
-      dataset = results;
-  })
-  return dataset;
+      return results;
+  });
 }
 
 const chart = new Vue({
@@ -99,7 +91,7 @@ const chart = new Vue({
     dataSource: myDataSource
   },
   mounted: function () {
-    //this.updateSkills();
+    this.updateSkills();
   },
   methods: {
     async updateSkills() {
@@ -123,13 +115,14 @@ const chart = new Vue({
   }
 });
 
+/*
+
 // https://developer.github.com/v3/repos/contents/
 async function getListSkillFileNames() {
-  let obj;
   
-  await parseUrlResponseUsingFetch("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data")
+  var obj = await parseUrlResponseUsingFetch("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data")
   .then(function(result) {
-    obj = result;
+    return result;
   });
 
   return obj
@@ -148,3 +141,5 @@ const boxes = new Vue({
     }
   }
 });
+
+*/
