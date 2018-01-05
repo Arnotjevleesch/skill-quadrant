@@ -20,7 +20,8 @@ const myDataSource = {
         "quadrantLabelTL": "ENTHOUSIASTE",
         "quadrantLabelTR": "ÉVANGÉLISTE",
         "quadrantLabelBL": "CURIEUX",
-        "quadrantLabelBR": "EXPERIMENTÉ"
+        "quadrantLabelBR": "EXPERIMENTÉ",
+        "bubbleScale": "0.5"
     },
     "categories": [{
         "category": [{
