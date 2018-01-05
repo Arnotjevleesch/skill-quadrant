@@ -9,6 +9,7 @@
     <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.charts.js"></script>
     <script type="text/javascript" src="https://unpkg.com/fusioncharts@3.12.1/themes/fusioncharts.theme.fint.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vue-fusioncharts/dist/vue-fusioncharts.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
   </head>
   <body>
     <div id="app">
@@ -22,7 +23,7 @@
         :dataSource="dataSource"
       ></fusioncharts>
       </div>
-
+<!--
       <div id="boxes">
         <p>
           <input type="checkbox" id="languages" ref="languages" checked @click="updateSkills"/>
@@ -36,11 +37,16 @@
           <input type="checkbox" id="methods" ref="methods" checked @click="updateSkills"/>
           <label for="methods">Méthodes</label>
         </p>
-      </div >
-
+      </div>
+-->
+      <div id="dynboxes">
+        <p v-for="box in dynboxeslist">
+          <input type="checkbox" :id="box" ref="boxesref" checked @click="updateSkills"/>
+          <label :for="box">{{ box }}</label>
+        </p>
+      </div>
+      
     </div>
-
-
 
     <script type="text/javascript" src="index.js"></script>
   </body>

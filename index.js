@@ -88,14 +88,16 @@ const chart = new Vue({
     width: '1000', //to specify the width of the chart
     height: '600', //to specify the height of the chart
     dataFormat: 'json',
-    dataSource: myDataSource
+    dataSource: myDataSource,
+    dynboxeslist: []
   },
-  mounted: function () {
+  async mounted () {
+    await this.loadSkills();
     this.updateSkills();
   },
   methods: {
     async updateSkills() {
-      ids = Object.values(this.$refs)
+      ids = this.$refs.boxesref
         .filter(ref => ref.checked)
         .map(ref => ref.id);
 
@@ -111,11 +113,12 @@ const chart = new Vue({
       const prevDs = Object.assign({}, this.dataSource);
       prevDs.dataset = dataset;
       this.dataSource = prevDs;
+    },
+    async loadSkills() {
+      this.dynboxeslist = await getListSkillFileNames();
     }
   }
 });
-
-/*
 
 // https://developer.github.com/v3/repos/contents/
 async function getListSkillFileNames() {
@@ -129,17 +132,3 @@ async function getListSkillFileNames() {
     .map(file => file.name)
     .map(name => name.split('.')[0]);
 }
-
-const boxes = new Vue({
-  el: '#boxes',
-  mounted: function () {
-    this.loadSkills();
-  },
-  methods: {
-    async loadSkills() {
-      console.log(await getListSkillFileNames());
-    }
-  }
-});
-
-*/
