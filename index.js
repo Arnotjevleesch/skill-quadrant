@@ -32,46 +32,22 @@ const myDataSource = {
     }]
 };
 
-function parseUrlResponse(url) {
-  return new Promise(function(resolve, reject) {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(e) {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          resolve(JSON.parse(xhr.responseText))
-        } else {
-          reject(xhr.status)
-        }
-      }
-    }
-    xhr.ontimeout = function () {
-      reject('timeout')
-    }
-    xhr.open('get', url, true)
-    xhr.send()
-  })
+async function parseJsonFromUrl(url) {
+  return await (await fetch(url)).json();
 }
 
-async function parseUrlResponseUsingFetch(url) {
+async function buildSkillData() {
+  folderUrl = "https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data";
+  filesData = await parseJsonFromUrl(folderUrl);
 
-  return await fetch(url)
-  .then(function(response) {
-      var contentType = response.headers.get("content-type");
-      if(contentType && contentType.indexOf("application/json") !== -1) {
-        return response.json();
-      } else {
-        console.log("Oops, nous n'avons pas du JSON!");
-      }
-    }) // Transform the data into json
-  .then(function(data) {
-      return data;
-  });
+  return await Promise.all(filesData.map(file => file.download_url).map(url => parseJsonFromUrl(url)));
 }
+
 
 async function buildDataset(ids) {
 
   return await Promise.all(ids.map(function(id) {
-      return parseUrlResponseUsingFetch("https://arnotjevleesch.github.io/skill-quadrant/skill-data/" + id + ".json")
+      return parseJsonFromUrl("https://arnotjevleesch.github.io/skill-quadrant/skill-data/" + id + ".json")
       .then(function(result) {
           return result;
       });
@@ -115,6 +91,10 @@ const chart = new Vue({
       this.dataSource = prevDs;
     },
     async loadSkills() {
+
+      var res = await buildSkillData();
+      console.log(res);
+
       this.dynboxeslist = await getListSkillFileNames();
     }
   }
@@ -122,8 +102,8 @@ const chart = new Vue({
 
 // https://developer.github.com/v3/repos/contents/
 async function getListSkillFileNames() {
-  
-  var obj = await parseUrlResponseUsingFetch("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data")
+
+  var obj = await parseJsonFromUrl("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data")
   .then(function(result) {
     return result;
   });
