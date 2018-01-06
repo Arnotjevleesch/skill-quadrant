@@ -40,12 +40,12 @@
       </div>
 -->
       <div id="dynboxes">
-        <p v-for="box in dynboxeslist">
-          <input type="checkbox" :id="box" ref="boxesref" checked @click="updateSkills"/>
-          <label :for="box">{{ box }}</label>
+        <p v-for="skill in skilldata">
+          <input type="checkbox" :id="skill.id" ref="dynboxesref" checked @click="updateSkills"/>
+          <label :for="skill.id">{{ skill.text }}</label>
         </p>
       </div>
-      
+
     </div>
 
     <script type="text/javascript" src="index.js"></script>

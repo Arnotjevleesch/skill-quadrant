@@ -40,7 +40,8 @@ async function buildSkillData() {
   folderUrl = "https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data";
   filesData = await parseJsonFromUrl(folderUrl);
 
-  return await Promise.all(filesData.map(file => file.download_url).map(url => parseJsonFromUrl(url)));
+  obj = await Promise.all(filesData.map(file => file.download_url).map(url => parseJsonFromUrl(url)));
+  return obj;
 }
 
 
@@ -65,15 +66,19 @@ const chart = new Vue({
     height: '600', //to specify the height of the chart
     dataFormat: 'json',
     dataSource: myDataSource,
-    dynboxeslist: []
+    skilldata: []
   },
   async mounted () {
-    await this.loadSkills();
-    this.updateSkills();
+    this.skilldata = await buildSkillData();
+    this.$nextTick(function () {
+      // Code that will run only after the
+      // entire view has been rendered
+      this.updateSkills();
+    });
   },
   methods: {
     async updateSkills() {
-      ids = this.$refs.boxesref
+      ids = this.$refs.dynboxesref
         .filter(ref => ref.checked)
         .map(ref => ref.id);
 
@@ -88,27 +93,8 @@ const chart = new Vue({
 
       const prevDs = Object.assign({}, this.dataSource);
       prevDs.dataset = dataset;
+      //prevDs.dataset = Object.freeze(this.skilldata);
       this.dataSource = prevDs;
-    },
-    async loadSkills() {
-
-      var res = await buildSkillData();
-      console.log(res);
-
-      this.dynboxeslist = await getListSkillFileNames();
     }
   }
 });
-
-// https://developer.github.com/v3/repos/contents/
-async function getListSkillFileNames() {
-
-  var obj = await parseJsonFromUrl("https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data")
-  .then(function(result) {
-    return result;
-  });
-
-  return obj
-    .map(file => file.name)
-    .map(name => name.split('.')[0]);
-}
