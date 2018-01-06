@@ -1,12 +1,14 @@
 {
-    "color": "#00aee4",
-    "data": [{
-        "x": "90",
-        "y": "90",
-        "name": "Git"
-    },{
-        "x": "20",
-        "y": "30",
-        "name": "SVN"
-    }]
+  "id": "scm",
+  "text": "Gestion de sources",
+  "color": "#00aee4",
+  "data": [{
+      "x": "90",
+      "y": "90",
+      "name": "Git"
+  },{
+      "x": "20",
+      "y": "30",
+      "name": "SVN"
+  }]
 }
