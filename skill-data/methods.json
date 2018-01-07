@@ -1,8 +1,11 @@
 {
+    "id": "methods",
+    "text": "Méthodes",
     "color": "#dd1111",
     "data": [{
         "x": "80",
         "y": "50",
+        "z": "10",
         "name": "Scrum"
     }]
 }
