@@ -1,6 +1,6 @@
 Vue.use(VueFusionCharts);
 
-const myDataSource = {
+var myDataSource = {
   "chart": {
         "caption": "Compétences",
         "subcaption": "",
@@ -37,6 +37,7 @@ async function parseJsonFromUrl(url) {
 }
 
 async function buildSkillData() {
+  // fetch don't work with file:// so url from github to work properly in local
   folderUrl = "https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data";
   filesData = await parseJsonFromUrl(folderUrl);
 
@@ -44,18 +45,11 @@ async function buildSkillData() {
   return obj;
 }
 
-
-async function buildDataset(ids) {
-
-  return await Promise.all(ids.map(function(id) {
-      return parseJsonFromUrl("https://arnotjevleesch.github.io/skill-quadrant/skill-data/" + id + ".json")
-      .then(function(result) {
-          return result;
-      });
-  })).then(function(results) {
-      // results is an array of skill json object
-      return results;
-  });
+async function buildDatasource(){
+  skilldata = await buildSkillData();
+  const prevDs = Object.assign({}, myDataSource);
+  prevDs.dataset = skilldata;
+  return prevDs;
 }
 
 const chart = new Vue({
@@ -65,19 +59,16 @@ const chart = new Vue({
     width: '1000', //to specify the width of the chart
     height: '600', //to specify the height of the chart
     dataFormat: 'json',
-    dataSource: myDataSource,
-    skilldata: []
+    dataSource: {},
+    boxesData:{}
   },
   async mounted () {
-    this.skilldata = await buildSkillData();
-    this.$nextTick(function () {
-      // Code that will run only after the
-      // entire view has been rendered
-      this.updateSkills();
-    });
+    this.dataSource = await buildDatasource();
+    this.boxesData = this.dataSource.dataset;
   },
   methods: {
     async updateSkills() {
+
       ids = this.$refs.dynboxesref
         .filter(ref => ref.checked)
         .map(ref => ref.id);
@@ -89,12 +80,7 @@ const chart = new Vue({
         return;
       }
 
-      dataset = await buildDataset(ids);
-
-      const prevDs = Object.assign({}, this.dataSource);
-      prevDs.dataset = dataset;
-      //prevDs.dataset = Object.freeze(this.skilldata);
-      this.dataSource = prevDs;
+      this.dataSource.dataset = this.dataSource.dataset.filter(item => ids.includes(item.id));
     }
   }
 });

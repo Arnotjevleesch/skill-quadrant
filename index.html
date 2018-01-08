@@ -9,7 +9,6 @@
     <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.charts.js"></script>
     <script type="text/javascript" src="https://unpkg.com/fusioncharts@3.12.1/themes/fusioncharts.theme.fint.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vue-fusioncharts/dist/vue-fusioncharts.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
   </head>
   <body>
     <div id="app">
@@ -23,24 +22,9 @@
         :dataSource="dataSource"
       ></fusioncharts>
       </div>
-<!--
-      <div id="boxes">
-        <p>
-          <input type="checkbox" id="languages" ref="languages" checked @click="updateSkills"/>
-          <label for="languages">Langages</label>
-        </p>
-        <p>
-          <input type="checkbox" id="scm" ref="scm" checked @click="updateSkills"/>
-          <label for="scm">Gestion de sources</label>
-        </p>
-        <p>
-          <input type="checkbox" id="methods" ref="methods" checked @click="updateSkills"/>
-          <label for="methods">Méthodes</label>
-        </p>
-      </div>
--->
+
       <div id="dynboxes">
-        <p v-for="skill in skilldata">
+        <p v-for="skill in boxesData">
           <input type="checkbox" :id="skill.id" ref="dynboxesref" checked @click="updateSkills"/>
           <label :for="skill.id">{{ skill.text }}</label>
         </p>
