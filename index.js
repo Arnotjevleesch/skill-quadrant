@@ -52,6 +52,8 @@ async function buildDatasource(){
   return prevDs;
 }
 
+var ds;
+
 const chart = new Vue({
   el: '#app',
   data: {
@@ -63,7 +65,8 @@ const chart = new Vue({
     boxesData:{}
   },
   async mounted () {
-    this.dataSource = await buildDatasource();
+    ds = await buildDatasource()
+    this.dataSource = Object.assign({}, ds);
     this.boxesData = this.dataSource.dataset;
   },
   methods: {
@@ -80,7 +83,7 @@ const chart = new Vue({
         return;
       }
 
-      this.dataSource.dataset = this.dataSource.dataset.filter(item => ids.includes(item.id));
+      this.dataSource.dataset = Object.assign({}, ds).dataset.filter(item => ids.includes(item.id));
     }
   }
 });
