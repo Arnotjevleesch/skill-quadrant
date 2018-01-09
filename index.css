@@ -4,10 +4,10 @@
   grid-gap: 10px;
 }
 
-#boxes {
-  font-family: Georgia, 'Times New Roman', Times, serif
+#dynboxes {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-#dynboxes {
-  font-family: Georgia, 'Times New Roman', Times, serif
+.legend {
+  border: 1px solid rgba(0, 0, 0, .2);
 }

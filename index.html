@@ -26,7 +26,7 @@
       <div id="dynboxes">
         <p v-for="skill in boxesData">
           <input type="checkbox" :id="skill.id" ref="dynboxesref" checked @click="updateSkills"/>
-          <label :for="skill.id">{{ skill.text }}</label>
+          <label :for="skill.id" class="legend" v-bind:style="{ background: skill.color}">{{ skill.text }}</label>
         </p>
       </div>
 
