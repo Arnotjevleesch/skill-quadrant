@@ -1,0 +1,31 @@
+{
+    "id": "languages",
+    "text": "Langages",
+    "color": "#9bd8db",
+    "data": [
+        {
+            "x": 40,
+            "y": 26,
+            "z": 10,
+            "name": "PHP"
+        },
+        {
+            "x": 22,
+            "y": 26,
+            "z": 10,
+            "name": "C/C++"
+        },
+        {
+            "x": 70,
+            "y": 83,
+            "z": 10,
+            "name": "JavaScript"
+        },
+        {
+            "x": 83,
+            "y": 73,
+            "z": 10,
+            "name": "Java"
+        }
+    ]
+}
