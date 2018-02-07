@@ -1,0 +1,49 @@
+{
+    "id": "js",
+    "text": "Ecosystème JS",
+    "color": "#f086b9",
+    "data": [
+        {
+            "x": 6,
+            "y": 66,
+            "z": 10,
+            "name": "Storybook"
+        },
+        {
+            "x": 17,
+            "y": 64,
+            "z": 10,
+            "name": "Bootstrap"
+        },
+        {
+            "x": 60,
+            "y": 92,
+            "z": 10,
+            "name": "Vue.js"
+        },
+        {
+            "x": 30,
+            "y": 78,
+            "z": 10,
+            "name": "Node.js / Express"
+        },
+        {
+            "x": 65,
+            "y": 78,
+            "z": 10,
+            "name": "npm"
+        },
+        {
+            "x": 40,
+            "y": 78,
+            "z": 10,
+            "name": "ES6+"
+        },
+        {
+            "x": 56,
+            "y": 29,
+            "z": 10,
+            "name": "ES5-"
+        }
+    ]
+}
