@@ -1,0 +1,37 @@
+{
+    "id": "devops",
+    "text": "Indus / DevOps",
+    "color": "#ce9dd9",
+    "data": [
+        {
+            "x": 71,
+            "y": 77,
+            "z": 10,
+            "name": "GitLab / GitHub"
+        },
+        {
+            "x": 26,
+            "y": 34,
+            "z": 10,
+            "name": "JMeter"
+        },
+        {
+            "x": 83,
+            "y": 35,
+            "z": 10,
+            "name": "Sonar"
+        },
+        {
+            "x": 34,
+            "y": 87,
+            "z": 10,
+            "name": "Docker / Rancher"
+        },
+        {
+            "x": 83,
+            "y": 86,
+            "z": 10,
+            "name": "Jenkins"
+        }
+    ]
+}

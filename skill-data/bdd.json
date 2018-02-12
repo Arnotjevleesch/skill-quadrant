@@ -1,0 +1,25 @@
+{
+    "id": "bdd",
+    "text": "BDD",
+    "color": "#80f79a",
+    "data": [
+        {
+            "x": 50,
+            "y": 32,
+            "z": 10,
+            "name": "MySQL"
+        },
+        {
+            "x": 60,
+            "y": 32,
+            "z": 10,
+            "name": "Oracle 10g"
+        },
+        {
+            "x": 69,
+            "y": 32,
+            "z": 10,
+            "name": "PostgreSQL"
+        }
+    ]
+}

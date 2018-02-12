@@ -1,0 +1,37 @@
+{
+    "id": "soft",
+    "text": "Soft skills",
+    "color": "#f8ee7e",
+    "data": [
+        {
+            "x": 89,
+            "y": 63,
+            "z": 10,
+            "name": "Scrum"
+        },
+        {
+            "x": 83,
+            "y": 78,
+            "z": 10,
+            "name": "Compétence rédactionnelle"
+        },
+        {
+            "x": 21,
+            "y": 53,
+            "z": 10,
+            "name": "Leadership"
+        },
+        {
+            "x": 79,
+            "y": 89,
+            "z": 10,
+            "name": "Veille technique"
+        },
+        {
+            "x": 88,
+            "y": 86,
+            "z": 10,
+            "name": "Anglais"
+        }
+    ]
+}
