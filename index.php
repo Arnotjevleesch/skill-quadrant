@@ -25,8 +25,8 @@
         :type="type"
         :width="width"
         :height="height"
-        :data-format="data-format"
-        :data-source="data-source"
+        :dataFormat="data-format"
+        :dataSource="data-source"
       ></fusioncharts>
       </div>
 
