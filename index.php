@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.js"></script>
     <script type="text/javascript" src="https://unpkg.com/fusioncharts/fusioncharts.charts.js"></script>
     <script type="text/javascript" src="https://unpkg.com/fusioncharts@3.12.1/themes/fusioncharts.theme.fint.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/vue-fusioncharts/dist/vue-fusioncharts.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vue-fusioncharts/dist/vue-fusioncharts.js"></script>
 
     <?php
       $github_client_id = getenv('GITHUB_CLIENT_ID');
