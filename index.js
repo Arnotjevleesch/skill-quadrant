@@ -47,9 +47,9 @@ async function buildSkillData() {
 }
 
 async function buildDatasource(){
-  //skilldata = await buildSkillData();
+  skilldata = await buildSkillData();
   const prevDs = Object.assign({}, myDataSource);
-  //prevDs.dataset = skilldata;
+  prevDs.dataset = skilldata;
   return prevDs;
 }
 
@@ -62,7 +62,7 @@ const chart = new Vue({
     width: '1000', //to specify the width of the chart
     height: '600', //to specify the height of the chart
     dataFormat: 'json',
-    dataSource: {},
+    dataSource: myDataSource,
     boxesData:{}
   },
   async mounted () {
