@@ -62,14 +62,14 @@ const chart = new Vue({
     width: '1000', //to specify the width of the chart
     height: '600', //to specify the height of the chart
     dataFormat: 'json',
-    dataSource: Object.assign({}, myDataSource),
+    dataSource: {},
     boxesData:{}
   },
-  //async mounted () {
-  //  ds = await buildDatasource()
-  //  this.dataSource = Object.assign({}, ds);
-  //  this.boxesData = this.dataSource.dataset;
-  //},
+  async mounted () {
+    ds = await buildDatasource()
+    this.dataSource = Object.assign({}, ds);
+    this.boxesData = this.dataSource.dataset;
+  },
   methods: {
     async updateSkills() {
 
