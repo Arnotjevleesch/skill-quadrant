@@ -68,7 +68,7 @@ const chart = new Vue({
   async mounted () {
     ds = await buildDatasource()
     this.dataSource = Object.assign({}, ds);
-    this.boxesData = this.dataSource.dataset;
+    this.boxesData = ds.dataset;
   },
   methods: {
     async updateSkills() {
