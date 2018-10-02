@@ -10,14 +10,11 @@
     <script type="text/javascript" src="https://unpkg.com/fusioncharts@3.12.1/themes/fusioncharts.theme.fint.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vue-fusioncharts/dist/vue-fusioncharts.js"></script>
 
-    <?php
-      $github_client_id = getenv('GITHUB_CLIENT_ID');
-      $github_client_secret = getenv('GITHUB_CLIENT_SECRET');
-    ?>
-
   </head>
   <body>
 
+
+    
     <div id="app">
 
       <div>
@@ -38,11 +35,6 @@
       </div>
 
     </div>
-
-    <script type="text/javascript">
-      var github_client_id = "<?php echo $github_client_id; ?>";
-      var github_client_secret = "<?php echo $github_client_secret; ?>";
-    </script>
     
     <script type="text/javascript" src="index.js"></script>
   </body>

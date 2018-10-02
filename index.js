@@ -1,4 +1,4 @@
-Vue.use(VueFusionCharts);
+Vue.use(VueFusionCharts, FusionCharts);
 
 var myDataSource = {
   "chart": {
@@ -39,7 +39,7 @@ async function parseJsonFromUrl(url) {
 async function buildSkillData() {
   
   // fetch don't work with file:// so url from github to work properly in local
-  folderUrl = "https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data?client_id=" + github_client_id + "&client_secret=" + github_client_secret;
+  folderUrl = "https://api.github.com/repos/Arnotjevleesch/skill-quadrant/contents/skill-data";
   filesData = await parseJsonFromUrl(folderUrl);
 
   obj = await Promise.all(filesData.map(file => file.download_url).map(url => parseJsonFromUrl(url)));
